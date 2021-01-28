@@ -8,11 +8,9 @@ import { fetchFormStatus } from '../actions/index';
 import Breadcrumbs from '@department-of-veterans-affairs/component-library/Breadcrumbs';
 
 import WizardContainer from '../wizard/WizardContainer';
-import {
-  WIZARD_STATUS,
-  WIZARD_STATUS_NOT_STARTED,
-  WIZARD_STATUS_COMPLETE,
-} from 'applications/static-pages/wizard';
+import { WIZARD_STATUS_COMPLETE } from 'applications/static-pages/wizard';
+
+const WIZARD_STATUS = 'fsrWizardStatus';
 
 const App = ({
   location,
@@ -24,8 +22,7 @@ const App = ({
 }) => {
   const showMainContent = !pending && !isError;
   const showWizard = true;
-  const defaultWizardState =
-    sessionStorage.getItem(WIZARD_STATUS) || WIZARD_STATUS_NOT_STARTED;
+  const defaultWizardState = sessionStorage.getItem(WIZARD_STATUS);
 
   const [wizardState, setWizardState] = useState(defaultWizardState);
 

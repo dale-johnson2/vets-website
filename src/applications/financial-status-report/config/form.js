@@ -58,6 +58,8 @@ const formConfig = {
       'Please sign in again to continue your application for financial hardship assistance.',
   },
   saveInProgress: {
+    restartWizardKey: 'fsrWizardStatus',
+    restartFormCallback: () => '/',
     messages: {
       inProgress:
         'Your application for financial hardship assistance is in progress.',
