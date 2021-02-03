@@ -1,11 +1,12 @@
 import React from 'react';
 
-const renderSections = props => {
+const HealthCareCard = props => {
   let cardTitle;
   let line1;
   let line2;
   let line3;
   const blueInfoBox = {};
+  let sectionTitle;
 
   if (props.type === 'messages') {
     cardTitle = 'Latest Message';
@@ -24,7 +25,6 @@ const renderSections = props => {
     line1 = 'Monday, November 12th, 2020';
     line2 = 'Time: 9:00 a.m. ET';
     line3 = 'VA Video Connect';
-    extraMargin = true;
     sectionTitle = 'Appointments';
     blueInfoBox.icon = 'calendar';
     blueInfoBox.text = '6 upcoming appointments';
@@ -33,6 +33,7 @@ const renderSections = props => {
   }
 
   if (props.type === 'prescriptions') {
+    sectionTitle = 'Prescriptions';
     cardTitle = 'Prescription refills';
     line1 = 'Metformin, 500 mg';
     line2 = 'Status: submitted on Monday, March 11th, 2021';
@@ -44,12 +45,7 @@ const renderSections = props => {
   }
 
   return (
-    <div
-      className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin-right--2 vads-l-col--12 medium-screen:vads-l-col--4 large-screen:vads-l-col--3"
-      style={{
-        overflow: 'hidden',
-      }}
-    >
+    <div className="vads-u-display--flex vads-u-flex-direction--column vads-l-col--12 medium-screen:vads-l-col--4 vads-u-padding-right--2">
       {/* Title */}
       <h3 className="vads-u-font-size--h4">{sectionTitle}</h3>
 
@@ -65,14 +61,12 @@ const renderSections = props => {
 
       {/* CTA */}
       <a
+        aria-label={`${blueInfoBox.ariaLabel} (opens in new tab)`}
         className="vads-u-font-weight--bold vads-u-background-color--primary-alt-lightest vads-u-padding--1 vads-u-margin-top--2"
         href=""
         rel="noreferrer noopener"
-        style={{
-          fontSize: '1.4rem',
-        }}
+        style={{ fontSize: '1.4rem' }}
         target="_blank"
-        aria-label={`${blueInfoBox.ariaLabel} (opens in new tab)`}
       >
         <i
           aria-hidden="true"
@@ -86,25 +80,9 @@ const renderSections = props => {
       </a>
     </div>
   );
-
-  const SectionTitles = (
-    <div className={wrapperClass} key={`${sectionTitle}-title`}>
-      <h3>{sectionTitle}</h3>
-    </div>
-  );
-
-  const BlueInfoBox = (
-    <div className={wrapperClass} key={`${sectionTitle}-infoBox`}>
-      <span>{blueInfoBox.ariaLabel}</span>
-    </div>
-  );
-
-  return { SectionTitles, Contents, BlueInfoBox };
 };
 
 const HealthCare = () => {
-  const types = ['messages', 'appointments', 'prescriptions'];
-
   return (
     <>
       <h2 className="vads-u-margin-y--0">Health care</h2>
@@ -116,14 +94,6 @@ const HealthCare = () => {
         <HealthCareCard type="appointments" />
         {/* Prescriptions */}
         <HealthCareCard type="prescriptions" />
-      </div>
-
-      <div className="vads-l-row vads-u-justify-content--space-between">
-        {types.map(type => renderSections(type).Contents)}
-      </div>
-
-      <div className="vads-l-row vads-u-justify-content--space-between">
-        {types.map(type => renderSections(type).BlueInfoBox)}
       </div>
     </>
   );
