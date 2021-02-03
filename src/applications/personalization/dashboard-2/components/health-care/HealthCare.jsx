@@ -5,8 +5,6 @@ const renderSections = props => {
   let line1;
   let line2;
   let line3;
-  let extraMargin = false;
-  let sectionTitle;
   const blueInfoBox = {};
 
   if (props.type === 'messages') {
@@ -39,32 +37,53 @@ const renderSections = props => {
     line1 = 'Metformin, 500 mg';
     line2 = 'Status: submitted on Monday, March 11th, 2021';
     line3 = '';
-    sectionTitle = 'Prescriptions';
-    blueInfoBox.icon = 'prescriptions';
+    blueInfoBox.icon = 'prescription-bottle';
     blueInfoBox.text = '3 prescription updates';
     blueInfoBox.href = 'www.google.com';
     blueInfoBox.ariaLabel = 'View prescription updates';
   }
 
-  const wrapperClass = extraMargin
-    ? 'medium-screen:vads-u-flex--1 medium-screen:vads-u-margin-x--2p5'
-    : 'medium-screen:vads-u-flex--1';
-
-  const Contents = (
+  return (
     <div
-      className="vads-u-display--flex vads-u-flex-direction--column"
-      key={`${sectionTitle}-contents`}
+      className="vads-u-display--flex vads-u-flex-direction--column vads-u-margin-right--2 vads-l-col--12 medium-screen:vads-l-col--4 large-screen:vads-l-col--3"
+      style={{
+        overflow: 'hidden',
+      }}
     >
-      <div className={wrapperClass}>
-        <div className="medium-screen:vads-u-flex--1 vads-u-background-color--gray-lightest vads-u-padding-y--2p5 vads-u-padding-x--2 vads-u-height--full">
-          <h4 className="vads-u-margin-top--0">
-            <strong>{cardTitle}</strong>
-          </h4>
-          <p>{line1}</p>
-          <p>{line2}</p>
-          <p className="vads-u-margin-bottom--0">{line3}</p>
-        </div>
+      {/* Title */}
+      <h3 className="vads-u-font-size--h4">{sectionTitle}</h3>
+
+      {/* Content */}
+      <div className="vads-u-background-color--gray-lightest vads-u-padding-y--2p5 vads-u-padding-x--2 vads-u-flex--fill">
+        <h4 className="vads-u-margin-top--0 vads-u-font-size--h3">
+          {cardTitle}
+        </h4>
+        <p>{line1}</p>
+        <p>{line2}</p>
+        <p className="vads-u-margin-bottom--0">{line3}</p>
       </div>
+
+      {/* CTA */}
+      <a
+        className="vads-u-font-weight--bold vads-u-background-color--primary-alt-lightest vads-u-padding--1 vads-u-margin-top--2"
+        href=""
+        rel="noreferrer noopener"
+        style={{
+          fontSize: '1.4rem',
+        }}
+        target="_blank"
+        aria-label={`${blueInfoBox.ariaLabel} (opens in new tab)`}
+      >
+        <i
+          aria-hidden="true"
+          className={`fas fa-${blueInfoBox.icon} vads-u-margin-x--1`}
+        />
+        {blueInfoBox.text}
+        <i
+          aria-hidden="true"
+          className="fas fa-chevron-right vads-u-margin-x--1"
+        />
+      </a>
     </div>
   );
 
@@ -88,10 +107,15 @@ const HealthCare = () => {
 
   return (
     <>
-      <h2>Health care</h2>
+      <h2 className="vads-u-margin-y--0">Health care</h2>
 
-      <div className="vads-l-row vads-u-justify-content--space-between">
-        {types.map(type => renderSections(type).SectionTitles)}
+      <div className="vads-u-display--flex vads-u-flex-wrap--wrap">
+        {/* Messages */}
+        <HealthCareCard type="messages" />
+        {/* Appointments */}
+        <HealthCareCard type="appointments" />
+        {/* Prescriptions */}
+        <HealthCareCard type="prescriptions" />
       </div>
 
       <div className="vads-l-row vads-u-justify-content--space-between">
