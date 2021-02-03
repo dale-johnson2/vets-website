@@ -45,12 +45,12 @@ const HealthCareCard = props => {
   }
 
   return (
-    <div className="vads-u-display--flex vads-u-flex-direction--column vads-l-col--12 medium-screen:vads-l-col--4 vads-u-padding-right--2">
+    <div className="vads-u-display--flex vads-u-flex-direction--column vads-l-col--12 medium-screen:vads-l-col--6 large-screen:vads-l-col--4 vads-u-padding-right--2">
       {/* Title */}
       <h3 className="vads-u-font-size--h4">{sectionTitle}</h3>
 
       {/* Content */}
-      <div className="vads-u-background-color--gray-lightest vads-u-padding-y--2p5 vads-u-padding-x--2 vads-u-flex--fill">
+      <div className="vads-u-background-color--gray-lightest vads-u-padding-y--2p5 vads-u-padding-x--2p5 vads-u-flex--fill">
         <h4 className="vads-u-margin-top--0 vads-u-font-size--h3">
           {cardTitle}
         </h4>
